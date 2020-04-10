@@ -33,7 +33,7 @@ fun OtpErlangObject.asMap(): Map<String, Any> {
     val erlangMap = this as OtpErlangMap
     val pairs = erlangMap.keys()
         .zip(erlangMap.values())
-        .map { it.first.asString() to it.second}
+        .map { it.first.asString() to it.second }
 
     return mapOf(*pairs.toTypedArray())
 }

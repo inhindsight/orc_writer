@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package orc
 
 import org.apache.hadoop.fs.Path
@@ -6,9 +8,6 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.io.File
-import java.time.LocalDate
-import java.time.temporal.ChronoUnit
-
 
 class OrcTest {
 

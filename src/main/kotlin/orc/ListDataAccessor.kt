@@ -5,7 +5,7 @@ import com.ericsson.otp.erlang.OtpErlangObject
 import org.apache.hadoop.hive.ql.exec.vector.ListColumnVector
 import org.apache.orc.TypeDescription
 
-class ListDataAccessor(private val schema: TypeDescription, private val columnVector: ListColumnVector): DataAccessor {
+class ListDataAccessor(private val schema: TypeDescription, private val columnVector: ListColumnVector) : DataAccessor {
 
     val accessor = DataAccessor.create(schema, arrayOf(columnVector.child)).first()
 
@@ -13,7 +13,7 @@ class ListDataAccessor(private val schema: TypeDescription, private val columnVe
         val start = columnVector.offsets[row]
         val end = start + columnVector.lengths[row]
 
-        return (start until end).fold(listOf<Any>(), {acc, subRow ->
+        return (start until end).fold(listOf<Any>(), { acc, subRow ->
             acc + accessor.get(subRow.toInt())
         })
     }

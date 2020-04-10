@@ -7,7 +7,7 @@ import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class TimestampDataAccessor(private val columnVector: TimestampColumnVector): DataAccessor {
+class TimestampDataAccessor(private val columnVector: TimestampColumnVector) : DataAccessor {
     override fun get(row: Int): Any {
         val ts = Timestamp(columnVector.getTime(row))
         ts.nanos = columnVector.getNanos(row)

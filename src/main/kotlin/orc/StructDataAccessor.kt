@@ -5,9 +5,8 @@ import com.ericsson.otp.erlang.OtpErlangObject
 import org.apache.hadoop.hive.ql.exec.vector.ColumnVector
 import org.apache.orc.TypeDescription
 import otp.asString
-import java.lang.IllegalArgumentException
 
-class StructDataAccessor(schema: TypeDescription, cols: Array<ColumnVector>): DataAccessor {
+class StructDataAccessor(schema: TypeDescription, cols: Array<ColumnVector>) : DataAccessor {
 
     private val fields = schema.fieldNames.withIndex()
     private val accessors = DataAccessor.create(schema, cols)

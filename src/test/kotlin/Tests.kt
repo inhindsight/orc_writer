@@ -1,18 +1,10 @@
 import com.ericsson.otp.erlang.OtpNode
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.fs.Path
-import org.apache.hadoop.hive.ql.exec.vector.BytesColumnVector
-import org.apache.hadoop.hive.ql.exec.vector.LongColumnVector
-import org.apache.orc.OrcFile
-import org.apache.orc.TypeDescription
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import otp.asAtom
-import java.io.ObjectInputFilter
-import java.nio.charset.StandardCharsets
 
 
 class Tests {
@@ -22,6 +14,7 @@ class Tests {
         GlobalScope.launch {
             orsimer.main(arrayOf())
         }
+        Thread.sleep(1_000)
     }
 
     @Test
@@ -32,7 +25,8 @@ class Tests {
         val msg = otp.tuple(
             otp.atom("start_dataset"),
             otp.string("ds1"),
-            otp.string("sb1")
+            otp.string("sb1"),
+            otp.string("struct<name:string>")
         )
 
         mailbox.send("main", "orsimer@127.0.0.1", msg)
@@ -50,6 +44,8 @@ class Tests {
 
         val response2 = mailbox.receive(10_000).asAtom()
         assertEquals("pong", response2)
+
+        testNode.close()
     }
 
 }

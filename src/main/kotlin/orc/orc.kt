@@ -1,12 +1,10 @@
 package orc
 
 import com.ericsson.otp.erlang.OtpErlangList
-import com.ericsson.otp.erlang.OtpErlangMap
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.orc.OrcFile
 import org.apache.orc.TypeDescription
-import otp.asString
 
 private val conf = Configuration()
 
@@ -38,6 +36,7 @@ fun write(schema: TypeDescription, data: OtpErlangList): Path {
     return path
 }
 
+@Suppress("UNCHECKED_CAST")
 fun read(path: Path): List<Map<String, Any>> {
     val reader = OrcFile.createReader(path, OrcFile.readerOptions(conf))
     val rows = reader.rows()

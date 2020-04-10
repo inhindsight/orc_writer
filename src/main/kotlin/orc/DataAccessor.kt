@@ -12,7 +12,7 @@ interface DataAccessor {
     companion object {
         fun create(schema: TypeDescription, cols: Array<ColumnVector>): List<DataAccessor> {
             val fields = schema.children.withIndex()
-            return fields.fold(listOf()) {acc, field ->
+            return fields.fold(listOf()) { acc, field ->
                 val columnVector = cols[field.index]
                 val result = when (field.value.category) {
                     LONG -> LongDataAccessor(columnVector as LongColumnVector)
